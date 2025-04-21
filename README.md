@@ -1,4 +1,4 @@
-# Ultra Viers Insectum
+# Ultra Vires Insectum
 
 ## Game Idea
 
