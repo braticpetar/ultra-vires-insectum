@@ -1,1 +1,0 @@
-function player.update(dt)

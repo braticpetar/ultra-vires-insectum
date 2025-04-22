@@ -1,34 +1,57 @@
 local movement = {}
 
 function movement.update(entity, dt)
+  if entity.weaponized then
+    mouse_handler(entity, dt)
+  end
+
+  keyboard_handler(entity, dt)
+ end
+
+function mouse_handler(entity, dt)
+  -- We get the x and y coordinate of the mouse
+  local mouseX, mouseY = love.mouse.getPosition()
+
+  -- We calculate the angle between character and mouse
+  local angle = math.deg(math.atan2(mouseY - (entity.y + entity.height), mouseX - (entity.x + entity.width))) % 360
+
+  -- Depending on the angle, we change character's position
+  if angle > 315 or angle < 45 then
+    entity.direction = "right"
+  elseif angle > 45 and angle < 135 then
+    entity.direction = "down"
+  elseif angle > 135 and angle < 225 then
+    entity.direction = "left"
+  elseif angle > 225 and angle < 315 then
+    entity.direction = "up"
+  end
+end
+
+function keyboard_handler(entity, dt)
   -- We use these local variables as a vector that we later normalize
   local moveX = 0
   local moveY = 0
 
   -- Handle up and down, with correct states and directions
   if love.keyboard.isDown("w") then
-   entity.direction = "up"
    entity.state = "running"
    moveY = moveY - 1
   elseif love.keyboard.isDown("s") then
-    entity.direction = "down"
     entity.state = "running"
     moveY = moveY + 1
   end
 
   -- Separately handle left and right so they can work at the same time
   if love.keyboard.isDown("a") then
-    entity.direction = "left"
     entity.state = "running"
     moveX = moveX - 1
   elseif love.keyboard.isDown("d") then
-    entity.direction = "right"
     entity.state = "running"
     moveX = moveX + 1
   end
 
   -- If no other keys are pressed, then character is idle, but direction is the same as last
-  if not (moveX ~= 0 or moveY ~= 0) or love.keyboard.isDown("lshift") then
+  if not (moveX ~= 0 or moveY ~= 0) then
     entity.state = "idle"
   end
 
@@ -37,13 +60,6 @@ function movement.update(entity, dt)
   if length > 0 then
     moveX = moveX / length
     moveY = moveY / length
-  end
-
-  -- Handle a dash, which just multiplies that vector by 10 and changes player state
-  if love.keyboard.isDown("lshift") then
-    entity.state = "dashing"
-    moveX = moveX * 10
-    moveY = moveY * 10
   end
 
   -- Increment our entities x and y values times movement speed each frame
