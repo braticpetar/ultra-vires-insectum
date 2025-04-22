@@ -43,11 +43,11 @@ function update_weapon(entity, dt)
 end
 
 function draw_weapon(entity)
-  if entity.direction == "right" or then
+  --if entity.direction == "right" or then
     love.graphics.draw(entity.weapon.image, entity.weapon.x, entity.weapon.y, entity.weapon.angle)
-  elseif entity.direction == "left" then
-    love.graphics.draw(entity.weapon.image, entity.weapon.x, entity.weapon.y, entity.weapon.angle, entity.weapon.scale, -entity.weapon.scale)
-  end
+ -- elseif entity.direction == "left" then
+    --love.graphics.draw(entity.weapon.image, entity.weapon.x, entity.weapon.y, entity.weapon.angle, entity.weapon.scale, -entity.weapon.scale)
+  --end
 end
 
 function update_character(entity, dt)
