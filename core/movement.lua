@@ -1,5 +1,9 @@
 local movement = {}
 
+local cube = love.graphics.newImage("cube.png")
+local cube_width = cube:getWidth()
+local cube_height = cube:getHeight()
+
 function movement.update(entity, dt)
   if entity.weaponized then
     mouse_handler(entity, dt)
@@ -55,6 +59,9 @@ function keyboard_handler(entity, dt)
     entity.state = "idle"
   end
 
+  moveX = moveX * cube_width / 2
+  moveY = moveY * cube_height / 4
+
   -- We normalize the vector, in order to have accurate diagonal movement
   local length = math.sqrt(moveX^2 + moveY^2)
   if length > 0 then
@@ -62,6 +69,7 @@ function keyboard_handler(entity, dt)
     moveY = moveY / length
   end
 
+  
   -- Increment our entities x and y values times movement speed each frame
   entity.x = entity.x + moveX * entity.movement_speed * dt
   entity.y = entity.y + moveY * entity.movement_speed * dt
