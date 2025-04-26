@@ -5,10 +5,7 @@ local cube_width = cube:getWidth()
 local cube_height = cube:getHeight()
 
 function movement.update(entity, dt)
-  if entity.weaponized then
-    mouse_handler(entity, dt)
-  end
-
+  mouse_handler(entity, dt)
   keyboard_handler(entity, dt)
  end
 
@@ -20,14 +17,14 @@ function mouse_handler(entity, dt)
   local angle = math.deg(math.atan2(mouseY - (entity.y + entity.height), mouseX - (entity.x + entity.width))) % 360
 
   -- Depending on the angle, we change character's position
-  if angle > 315 or angle < 45 then
-    entity.direction = "right"
-  elseif angle > 45 and angle < 135 then
-    entity.direction = "down"
-  elseif angle > 135 and angle < 225 then
-    entity.direction = "left"
-  elseif angle > 225 and angle < 315 then
-    entity.direction = "up"
+  if angle >= 0 and angle < 90 then
+    entity.direction = "IV"
+  elseif angle < 270 and angle > 180 then
+    entity.direction = "II"
+  elseif angle < 180 and angle > 90 then
+    entity.direction = "III"
+  else --angle is between 360 and 0
+    entity.direction = "I"
   end
 end
 

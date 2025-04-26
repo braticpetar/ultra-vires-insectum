@@ -1,11 +1,11 @@
-local image = love.graphics.newImage("assets/school-girl/idle_down.png")
+local image = love.graphics.newImage("assets/school-girl/idle_I.png")
 
 return {
   x = 100,
   y = 100,
   movement_speed = 300,
   state = "idle",
-  direction = "right",
+  direction = "I",
   animations = require("characters.school-girl.animations"),
   abilities = require("characters.school-girl.abilities"),
   height = image:getHeight(),
