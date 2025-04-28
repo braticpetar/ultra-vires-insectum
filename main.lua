@@ -8,6 +8,15 @@ local characters = {
   require("characters.school-girl.data")
 }
 
+if arg[2] == "test" then
+  local t = require("tests.test_characters")
+
+  for _, char in ipairs(characters) do
+    t.test_animations(char, 8)
+  end
+  love.event.quit()
+end
+
 function love.load()
   cube = love.graphics.newImage("cube.png")
   cube_width = cube:getWidth()

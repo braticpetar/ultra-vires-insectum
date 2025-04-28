@@ -22,7 +22,6 @@ function Animation.new(image, frames_number, fps, flipped, scale)
       i * frame_width, 0,
       frame_width, frame_height,
       image:getWidth(), image:getHeight()))
-      print("frame loaded")
   end
 
   return anim
