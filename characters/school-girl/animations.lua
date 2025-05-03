@@ -11,7 +11,7 @@ local images = {
 -- Animation.new(image, frames_number, fps, flipped, scale)
 local frames_number = 8
 local fps = 10 
-local scale = 3
+local scale = 1
 
 return {
   idle_I = Animation.new(images.idle_up, frames_number, fps, false, scale),

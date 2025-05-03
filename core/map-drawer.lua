@@ -5,8 +5,6 @@ function map.draw(level_map)
   local grid = level_map.grid
   local grid_size = level_map.grid_size
 
-  love.graphics.scale(2, 2)
-
   for i=1, grid_size do
     for j=1, grid_size do
       if grid[i][j] == 1 then
@@ -25,8 +23,6 @@ function map.draw(level_map)
 --      end
 --    end
 --  end
-
-  love.graphics.origin()
 end
 
 return map

@@ -1,20 +1,8 @@
 local movement = {}
 
-local cube = love.graphics.newImage("cube.png")
-local cube_width = cube:getWidth()
-local cube_height = cube:getHeight()
-
-function movement.update(entity, dt)
-  mouse_handler(entity, dt)
-  keyboard_handler(entity, dt)
- end
-
-function mouse_handler(entity, dt)
-  -- We get the x and y coordinate of the mouse
-  local mouseX, mouseY = love.mouse.getPosition()
-
+function movement.update(entity, mx, my, dt)
   -- We calculate the angle between character and mouse
-  local angle = math.deg(math.atan2(mouseY - (entity.y + entity.height), mouseX - (entity.x + entity.width))) % 360
+  local angle = math.deg(math.atan2(my - (entity.y + entity.height), mx - (entity.x + entity.width))) % 360
 
   -- Depending on the angle, we change character's position
   if angle >= 0 and angle < 90 then
@@ -26,10 +14,8 @@ function mouse_handler(entity, dt)
   else --angle is between 360 and 0
     entity.direction = "I"
   end
-end
 
-function keyboard_handler(entity, dt)
-  -- We use these local variables as a vector that we later normalize
+   -- We use these local variables as a vector that we later normalize
   local moveX = 0
   local moveY = 0
 
@@ -56,6 +42,7 @@ function keyboard_handler(entity, dt)
     entity.state = "idle"
   end
 
+  -- It takes global variables from main, fix later
   moveX = moveX * cube_width / 2
   moveY = moveY * cube_height / 4
 
