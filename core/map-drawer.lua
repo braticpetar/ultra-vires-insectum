@@ -1,28 +1,23 @@
 local map = {}
 
+local transform = require("libs.cord-inversion")
+
 function map.draw(level_map)
   local cube = level_map.cube
   local grid = level_map.grid
   local grid_size = level_map.grid_size
 
+  -- We loop through the whole grid table
   for i=1, grid_size do
     for j=1, grid_size do
+      -- If it's 1 then we draw certain cube
       if grid[i][j] == 1 then
-	love.graphics.draw(cube, (i-j)*cube_width/2, (i+j)*cube_height/4, 0, 1, 1, cube_width/2 - love.graphics.getWidth() / 2 / 2, -love.graphics.getHeight() / 4 / 2)
+	-- Outsorced to transform function
+	local x, y = transform.iso_to_screen(i, j)
+	love.graphics.draw(cube, x, y)
       end
     end
   end
-
---  for layer_index, layer in ipairs(level_map.grid) do
---    for row_index, row in ipairs(layer) do
---      for col_index, cell in ipairs(row) do
-
---	if cell == 0 then
---	  love.graphics.draw(level_map.cube, (row_index-col_index)*cube_width/2, (row_index+col_index)*cube_height/4, 0, 1, 1, cube_width/2 - love.graphics.getWidth()/2 /2, -love.graphics.getHeight() /4/2)
---	end
---      end
---    end
---  end
 end
 
 return map

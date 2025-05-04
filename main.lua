@@ -1,13 +1,15 @@
-local movement = require("core.movement")
+local input = require("core.input")
 local animator = require("core.animator")
 local mapper = require("core.map-drawer")
 local camera = require("core.camera")
+local transform = require("libs.cord-inversion")
 
 local dummy = require("maps.dummy")
 local player = require("characters.school-girl.data")
 
 -- Add all enemies here for a mass update
 local enemies = {
+  require("characters.bug-dummy.data")
 }
 
 -- Handles unit tests
@@ -20,13 +22,13 @@ if arg[2] == "test" then
   love.event.quit()
 end
 
-
 function love.load()
   cube = love.graphics.newImage("cube.png")
   cube_width = cube:getWidth()
   cube_height = cube:getHeight()
 
   --love.window.setFullscreen(true)
+  player.x, player.y = transform.screen_to_iso(1, 1, player.height)
 
 end
 
@@ -37,7 +39,7 @@ function love.update(dt)
   local worldX, worldY = camera.getWorldMouse()
 
   -- Handle player updates
-  movement.update(player, worldX, worldY, dt)
+  input.update(player, worldX, worldY, dt)
   animator.update(player, dt)
 
   -- Handle enemy updates
@@ -58,6 +60,8 @@ function love.draw()
 
   -- TODO draw enemies
   for _, enemy in ipairs(enemies) do
+    animator.draw(enemy)
+--    love.graphics.draw(enemy.image, enemy.x, enemy.y)
   end
 
   -- Reset camera settings

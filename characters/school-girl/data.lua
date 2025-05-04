@@ -1,8 +1,8 @@
 local image = love.graphics.newImage("assets/school-girl/idle_I.png")
 
 return {
-  x = 100,
-  y = 100,
+  x = 1,
+  y = 1,
   movement_speed = 100,
   state = "idle",
   direction = "I",
