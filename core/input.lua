@@ -23,7 +23,9 @@ function movement.update(entity, mx, my, dt)
   if love.keyboard.isDown("w") then
    entity.state = "running"
    moveY = moveY - 1
-  elseif love.keyboard.isDown("s") then
+  end
+  
+  if love.keyboard.isDown("s") then
     entity.state = "running"
     moveY = moveY + 1
   end
@@ -32,7 +34,9 @@ function movement.update(entity, mx, my, dt)
   if love.keyboard.isDown("a") then
     entity.state = "running"
     moveX = moveX - 1
-  elseif love.keyboard.isDown("d") then
+  end
+  
+  if love.keyboard.isDown("d") then
     entity.state = "running"
     moveX = moveX + 1
   end

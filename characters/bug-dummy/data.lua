@@ -5,4 +5,5 @@ return {
   state = "idle",
   direction = "III",
   animations = require("characters.bug-dummy.animations"),
+
 }

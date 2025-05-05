@@ -6,6 +6,7 @@ return {
   movement_speed = 100,
   state = "idle",
   direction = "I",
+  health = 100,
   animations = require("characters.school-girl.animations"),
   abilities = require("characters.school-girl.abilities"),
   height = image:getHeight(),
