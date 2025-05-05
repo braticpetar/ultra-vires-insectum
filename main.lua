@@ -2,19 +2,18 @@ local input = require("core.input")
 local animator = require("core.animator")
 local mapper = require("core.map-drawer")
 local camera = require("core.camera")
+local algo = require("libs.algo")
 local transform = require("libs.cord-inversion")
-
 local dummy = require("maps.dummy")
---local player = require("characters.school-girl.data")
+local player = require("characters.school-girl.data")
 
--- Add all enemies here for a mass update
----local enemies = {
---  require("characters.enemy-dummy.data")
---}
+local enemy_factory = require("characters.enemy-dummy.data")
 
-local characters = {
-  require("characters.school-girl.data"),
-  require("characters.enemy-dummy.data")
+local enemies = {
+  enemy_factory(),
+  enemy_factory(),
+  enemy_factory(),
+  enemy_factory(),
 }
 
 -- Handles unit tests
@@ -33,22 +32,27 @@ function love.load()
   cube_height = cube:getHeight()
 
   --love.window.setFullscreen(true)
-  characters[1].x, characters[1].y = transform.screen_to_iso(15, 30, characters[1].height)
-  characters[2].x, characters[2].y = transform.screen_to_iso(15, 5, characters[2].height)
+  player.x, player.y = transform.screen_to_iso(15, 30, player.height)
+  enemies[1].x, enemies[1].y = transform.screen_to_iso(5, 5, enemies[1].height)
+  enemies[2].x, enemies[2].y = transform.screen_to_iso(10, 5, enemies[2].height)
+  enemies[3].x, enemies[3].y = transform.screen_to_iso(15, 5, enemies[3].height)
+  enemies[4].x, enemies[4].y = transform.screen_to_iso(20, 5, enemies[4].height)
 end
 
 function love.update(dt)
   -- We set the camera position to the player's position
-  camera.setPlayerPosition(characters[1].x+50, characters[1].y)
+  camera.setPlayerPosition(player.x+50, player.y)
   -- We get the actual mouse coordinates in the world
   local worldX, worldY = camera.getWorldMouse()
 
   -- Handle player updates
-  input.update(characters[1], worldX, worldY, dt)
+  input.update(player, worldX, worldY, dt)
+
+  animator.update(player, dt)
 
   -- Handle enemy updates
-  for _, character in ipairs(characters) do
-    animator.update(character, dt)
+  for _, enemy in ipairs(enemies) do
+    animator.update(enemy, dt)
   end
 end
 
@@ -59,11 +63,20 @@ function love.draw()
   -- Draw the map
   mapper.draw(dummy)
 
+  -- Sort the enemies
+
+  local drawList = {player}
+  for _, enemy in ipairs(enemies) do
+    table.insert(drawList, enemy)
+  end
+
+  algo.sort(drawList)
+
   -- Draw characters 
-  for _, character in ipairs(characters) do
-    animator.draw(character)
-    if character.health then
-      love.graphics.print("HP: " .. character.health, character.x, character.y)
+  for _, char in ipairs(drawList) do
+    animator.draw(char)
+    if char.health then
+      love.graphics.print("HP: " .. char.health, char.x, char.y)
     end
   end
 
