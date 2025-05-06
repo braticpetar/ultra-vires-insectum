@@ -1,3 +1,4 @@
+love.graphics.setDefaultFilter("nearest", "nearest")
 local input = require("core.input")
 local animator = require("core.animator")
 local mapper = require("core.map-drawer")
@@ -76,10 +77,11 @@ function love.draw()
   for _, char in ipairs(drawList) do
     animator.draw(char)
     if char.health then
-      love.graphics.print("HP: " .. char.health, char.x, char.y)
+      love.graphics.print("HP: " .. char.health, char.x, char.y, 0, 0.5, 0.5)
     end
   end
 
   -- Reset camera settings
   camera.clear()
+  love.graphics.print("FPS: " .. tostring(love.timer.getFPS()), 10, 10)
 end
