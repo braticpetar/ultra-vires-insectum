@@ -58,7 +58,7 @@ function love.update(dt)
     if collider.movement_colliding(enemy, player) then
       print("COLLIDING")
     else
-      print("NOT")
+      print("NOT COLLIDING")
     end
   end
 end
