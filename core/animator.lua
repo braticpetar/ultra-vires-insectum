@@ -52,6 +52,12 @@ function draw_weapon(entity)
 end
 
 function update_character(entity, dt)
+
+  if entity.shadow then
+    entity.shadow.x = entity.x + entity.width / 2 - 7
+    entity.shadow.y = entity.y + entity.height - 25 
+  end
+  
   -- Key is formed with "state" + "_" + "direction"
   -- All animation names need to be properly configured in order for this to work
   -- We decide which animation is the corect 
@@ -68,6 +74,11 @@ function update_character(entity, dt)
 end
 
 function draw_character(entity)
+  
+  if entity.shadow then
+    love.graphics.draw(entity.shadow.image, entity.shadow.x, entity.shadow.y)
+  end
+
   -- We handle this error, if it's correctly assigned it should exist
   if entity.current_animation then
 

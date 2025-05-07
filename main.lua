@@ -84,7 +84,6 @@ function love.draw()
     animator.draw(char)
     if char.health then
       love.graphics.print("HP: " .. char.health, char.x, char.y, 0, 0.5, 0.5)
---      love.graphics.circle("line", char.x + char.width/2, char.y+char.height-20, 4) 
     end
   end
 

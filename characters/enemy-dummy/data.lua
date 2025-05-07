@@ -1,4 +1,5 @@
 local image = love.graphics.newImage("assets/enemies/enemy2.png")
+local shadow_image = love.graphics.newImage("assets/shadow.png")
 
 return function()
   return {
@@ -11,5 +12,11 @@ return function()
     health = 100,
     height = image:getHeight(),
     width = image:getWidth(),
+    shadow = {
+      image = shadow_image,
+      x = 1,
+      y = 1,
+      r = 4,
+    }
   }
 end
