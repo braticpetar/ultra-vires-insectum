@@ -1,7 +1,8 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
-local input = require("core.input")
+local player_movement = require("core.player-movement")
 local animator = require("core.animator")
 local mapper = require("core.map-drawer")
+local collider = require("core.collider")
 local camera = require("core.camera")
 local algo = require("libs.algo")
 local transform = require("libs.cord-inversion")
@@ -47,13 +48,18 @@ function love.update(dt)
   local worldX, worldY = camera.getWorldMouse()
 
   -- Handle player updates
-  input.update(player, worldX, worldY, dt)
+  player_movement.update(player, worldX, worldY, dt)
 
   animator.update(player, dt)
 
   -- Handle enemy updates
   for _, enemy in ipairs(enemies) do
     animator.update(enemy, dt)
+    if collider.movement_colliding(enemy, player) then
+      print("COLLIDING")
+    else
+      print("NOT")
+    end
   end
 end
 
@@ -78,6 +84,7 @@ function love.draw()
     animator.draw(char)
     if char.health then
       love.graphics.print("HP: " .. char.health, char.x, char.y, 0, 0.5, 0.5)
+--      love.graphics.circle("line", char.x + char.width/2, char.y+char.height-20, 4) 
     end
   end
 
