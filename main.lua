@@ -6,7 +6,7 @@ local collider = require("core.collider")
 local camera = require("core.camera")
 local algo = require("libs.algo")
 local transform = require("libs.cord-inversion")
-local dummy = require("maps.dummy")
+local street_map = require("maps.street")
 local player = require("characters.school-girl.data")
 
 local enemy_factory = require("characters.enemy-dummy.data")
@@ -68,7 +68,7 @@ function love.draw()
   camera.apply()
 
   -- Draw the map
-  mapper.draw(dummy)
+  mapper.draw(street_map)
 
   -- Sort the enemies
 
