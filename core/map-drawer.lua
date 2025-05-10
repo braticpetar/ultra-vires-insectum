@@ -9,29 +9,29 @@ function map.draw(level_map)
   local grid_width = level_map.width
 
   -- We loop through the whole grid table
-  for i=1, 40 do
-    for j=1, 40 do
+  for h=1, grid_height do
+    for w=1, grid_width do
       -- If it's 1 then we draw certain cube
-      if grid[i][j] == 1 then
+      if grid[h][w] == 1 then
       	cube = level_map.grass
-      elseif grid[i][j] == 2 then
+      elseif grid[h][w] == 2 then
      	cube = level_map.street_I
-      elseif grid[i][j] == 3 then
+      elseif grid[h][w] == 3 then
       	cube = level_map.street_III
-      elseif grid[i][j] == 4 then
+      elseif grid[h][w] == 4 then
       	cube = level_map.street_II
-      elseif grid[i][j] == 5 then
+      elseif grid[h][w] == 5 then
       	cube = level_map.street_IV
-      elseif grid[i][j] == 6 then
+      elseif grid[h][w] == 6 then
       	cube = level_map.side_walk
-      elseif grid[i][j] == 7 then
+      elseif grid[h][w] == 7 then
       	cube = level_map.street_blank 	
-      elseif grid[i][j] == 0 then
+      elseif grid[h][w] == 0 then
 	goto continue
       end
       
       -- Outsorced to transform function
-      local x, y = transform.iso_to_screen(j, i)
+      local x, y = transform.iso_to_screen(w, h)
       love.graphics.draw(cube, x, y)
       ::continue::
     end
