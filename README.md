@@ -15,7 +15,7 @@ Work in progress - anime isometric roguelike pixelart built from scratch in LOVE
 
 ## How to Setup
 1. Install [LOVE2D](https://love2d.org/)
-2. Clone the repo: 'git clone https://github.com/braticpetar/ultra-vires-insectum.git'
+2. Clone the repo: ```bash git clone https://github.com/braticpetar/ultra-vires-insectum.git```
 3. Then run: 'love ultra-vires-insectum'
 
 ## Tech Stack
