@@ -36,7 +36,6 @@ end
 function inversion.iso_to_screen(ix, iy)
   local sx
   local sy
-
   -- We undo the transformation
   sx = (ix - iy) * cube_width / 2
   sy = (ix + iy) * cube_height / 4
