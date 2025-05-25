@@ -1,6 +1,6 @@
 local inversion = {}
 
-cube = love.graphics.newImage("cube.png")
+cube = love.graphics.newImage("cubes/cube.png")
 cube_width = cube:getWidth()
 cube_height = cube:getHeight()
 

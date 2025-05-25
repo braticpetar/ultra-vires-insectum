@@ -1,6 +1,11 @@
 local movement = {}
 
 function movement.update(entity, mx, my, dt)
+  mouse_handler(entity, mx, my)
+  keyboard_handler(entity, dt)
+end
+
+function mouse_handler(entity, mx, my)
   -- We calculate the angle between character and mouse
   local angle = math.deg(math.atan2(my - (entity.y + entity.height), mx - (entity.x + entity.width))) % 360
 
@@ -14,7 +19,9 @@ function movement.update(entity, mx, my, dt)
   else --angle is between 360 and 0
     entity.direction = "I"
   end
+end
 
+function keyboard_handler(entity, dt)
    -- We use these local variables as a vector that we later normalize
   local moveX = 0
   local moveY = 0
@@ -56,7 +63,6 @@ function movement.update(entity, mx, my, dt)
     moveX = moveX / length
     moveY = moveY / length
   end
-
   
   -- Increment our entities x and y values times movement speed each frame
   entity.x = entity.x + moveX * entity.movement_speed * dt

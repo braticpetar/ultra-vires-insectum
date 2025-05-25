@@ -12,6 +12,7 @@ return {
   abilities = require("characters.school-girl.abilities"),
   height = image:getHeight(),
   width = image:getWidth() / 8,
+  colliding = false,
   shadow = {
     image = shadow_image,
     x = 0,

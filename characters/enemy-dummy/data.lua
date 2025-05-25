@@ -12,6 +12,7 @@ return function()
     health = 100,
     height = image:getHeight(),
     width = image:getWidth(),
+    colliding = false,
     shadow = {
       image = shadow_image,
       x = 1,

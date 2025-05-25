@@ -29,7 +29,7 @@ if arg[2] == "test" then
 end
 
 function love.load()
-  cube = love.graphics.newImage("cube.png")
+  cube = love.graphics.newImage("cubes/cube.png")
   cube_width = cube:getWidth()
   cube_height = cube:getHeight()
 
@@ -43,22 +43,25 @@ end
 
 function love.update(dt)
   -- We set the camera position to the player's position
-  camera.setPlayerPosition(player.x+50, player.y)
+  camera.setPlayerPosition(player.x+player.width/2, player.y+player.height/2)
   -- We get the actual mouse coordinates in the world
   local worldX, worldY = camera.getWorldMouse()
 
   -- Handle player updates
   player_movement.update(player, worldX, worldY, dt)
-
   animator.update(player, dt)
 
   -- Handle enemy updates
   for _, enemy in ipairs(enemies) do
     animator.update(enemy, dt)
     if collider.movement_colliding(enemy, player) then
-      print("COLLIDING")
+      enemy.colliding = true
+      player.colliding = true
+      print(player.colliding)
     else
-      print("NOT COLLIDING")
+      enemy.colliding = false
+      player.colliding = false
+      print(player.colliding)
     end
   end
 end
