@@ -25,6 +25,11 @@ local d = {
   {1, 2, 2, 2, 2}
 }
 
+local e = {
+  {1, 2},
+  {3, 4}
+}
+
 function t.test()
   print("MATRIX A:")
   matrix.print_matrix(a)
@@ -38,6 +43,8 @@ function t.test()
   matrix.print_matrix(matrix.add_matrices(a, a))
   print("SUBTRACTION")
   matrix.print_matrix(matrix.subtract_matrices(b, b))
+  print("INVERSE OF E:")
+  matrix.print_matrix(matrix.invert_matrix2(e))
 end
 
 return t

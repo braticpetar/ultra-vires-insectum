@@ -158,6 +158,30 @@ function m.transpose_matrix(a)
 end
 
 -- Inverts a 2x2 matrix
+function m.invert_matrix2(matrix)
+  if not m.validate_matrix(matrix) then
+    return
+  end
+
+  local a = matrix[1][1]
+  local b = matrix[1][2]
+  local c = matrix[2][1]
+  local d = matrix[2][2]
+
+  local result = {
+    {},
+    {}
+  }
+
+  local det = (a * d) - (b * c)
+
+  result[1][1] = d / det
+  result[1][2] = - b / det
+  result[2][1] = - c / det
+  result[2][2] = a / det
+
+  return result
+end
 
 
 
