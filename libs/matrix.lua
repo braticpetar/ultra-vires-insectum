@@ -137,6 +137,25 @@ function m.multiply_matrices(a, b)
 end
 
 -- Transposes a matrix
+function m.transpose_matrix(a)
+  if not m.validate_matrix(a) then
+    return
+  end
+
+  local result = {}
+
+  for i = 1, #a[1] do
+    result[i] = {}
+  end
+
+  for i = 1, #a do
+    for j = 1, #a[1] do
+      result[j][i] = a[i][j]
+    end
+  end
+
+  return result
+end
 
 -- Inverts a 2x2 matrix
 
