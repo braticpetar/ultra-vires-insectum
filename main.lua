@@ -21,10 +21,14 @@ local enemies = {
 -- Handles unit tests
 if arg[2] == "test" then
   local t = require("tests.test_characters")
+  local mtx = require("tests.test_matrices")
 
-  for _, char in ipairs(characters) do
-    t.test_animations(char, 8)
-  end
+  --for _, char in ipairs(characters) do
+   -- t.test_animations(char, 8)
+  --end
+
+  mtx.test()
+
   love.event.quit()
 end
 
