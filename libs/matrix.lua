@@ -50,6 +50,19 @@ function m.matrices_compatible(a, b)
   return true
 end
 
+-- Check if a matrix is square
+function m.is_square(a)
+  if not m.validate_matrix(a) then
+    return false
+  end
+
+  if #a == #a[1] then
+    return true
+  end
+
+  return false
+end
+
 -- Prints a matrix
 function m.print_matrix(a)
   io.write("MATRIX: \n")
@@ -109,19 +122,24 @@ function m.multiply_matrices(a, b)
     return
   end
 
-  local matrix = {}
+  local result = {}
   for i = 1, #a do
-    matrix[i] = {}
+    result[i] = {}
     for j = 1, #b[1] do
-      local num = a[i][1] * b[1][j]
-      for n = 2, #a[1] do
-	num = num + a[i][n] * b[n][j]
+      result[i][j] = 0
+      for k = 1, #a[1] do
+	result[i][j] = result[i][j] + (a[i][k] + b[k][j])
       end
-      matrix[i][j] = num
     end
   end
 
-  return matrix
+  return result
 end
+
+-- Transposes a matrix
+
+-- Inverts a 2x2 matrix
+
+
 
 return m
