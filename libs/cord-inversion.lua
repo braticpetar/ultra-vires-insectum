@@ -15,13 +15,9 @@ local transformation_matrix = {
 
 -- Taking certain coordinates and transforming them into iso coordinates
 function inversion.screen_to_iso(sx, sy, obj_height)
-  --local inverted_coordinates
-
-  --local cords = {{sx, sy}}
   local ix, iy
 
   -- We compute the coordinates 
-  --inverted_coordinates = matrix.multiply_matrices(cords, transformation_matrix)
   ix = transformation_matrix[1][1] * sx + transformation_matrix[1][2] * sy
   iy = transformation_matrix[2][1] * sx + transformation_matrix[2][2] * sy
 
@@ -32,19 +28,15 @@ function inversion.screen_to_iso(sx, sy, obj_height)
   -- and take sprite's height into a consideration
   iy = iy - obj_height / 2
 
-  --return inverted_coordinates[1][1], inverted_coordinates[1][2]
   return ix, iy
 end
 
 -- Having isometric coordinates and transforming them into actual screen coordinates
 function inversion.iso_to_screen(ix, iy)
-  --local reversed_cords
-  
-  --local cords = {{ix, iy}}
   local sx
   local sy
+
   -- We undo the transformation
-  --reversed_cords = matrix.multiply_matrices(cords, matrix.invert_matrix2(transformation_matrix))
   sx = (ix - iy) * cube_width / 2
   sy = (ix + iy) * cube_height / 4
 
@@ -52,7 +44,6 @@ function inversion.iso_to_screen(ix, iy)
   sx = sx - cube_width / 2 + screen_width / 4
   sy = sy + screen_height / 8
 
-  --return reversed_cords[1][1], reversed_cords[1][2]
   return sx, sy
 end
 
