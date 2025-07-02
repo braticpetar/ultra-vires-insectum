@@ -6,10 +6,10 @@ local m = {}
 -- This function checks if there is a value in each column and row
 function m.validate_matrix(a)
   for i = 1, #a-1 do
-    if #a[i] ~= #a[i+1] then
-      print("Not all rows and columns have value in this matrix!")
-      return false
-    end
+      if #a[i] ~= #a[i+1] then
+	print("Not all rows and columns have value in this matrix!")
+	return false
+      end
   end
 
   return true
