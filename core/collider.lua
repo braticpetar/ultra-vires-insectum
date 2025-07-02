@@ -12,7 +12,4 @@ function c.movement_colliding(entity1, entity2)
   return distance - (entity1.shadow.r + entity2.shadow.r) < 0 
 end
 
-
-
-
 return c

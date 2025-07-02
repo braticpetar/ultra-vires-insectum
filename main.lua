@@ -78,7 +78,6 @@ function love.draw()
   mapper.draw(street_map)
 
   -- Sort the enemies
-
   local drawList = {player}
   for _, enemy in ipairs(enemies) do
     table.insert(drawList, enemy)
